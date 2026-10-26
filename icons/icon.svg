@@ -1,0 +1,44 @@
+<!--
+  Toilet Trouble app icon (drawn by hand, so we own it — no emoji copyright issues).
+  Edit this file to change the icon, then ask for the PNG files to be regenerated.
+  Everything important stays inside the middle 80%, because phones crop icons
+  into circles, squircles, etc.
+  License: MIT (see the LICENSE file)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Background: bathroom-teal with tile lines -->
+  <rect width="512" height="512" fill="#6cc9bc"/>
+  <g stroke="#ffffff" stroke-opacity="0.35" stroke-width="4">
+    <path d="M128 0V512M256 0V512M384 0V512M0 128H512M0 256H512M0 384H512"/>
+  </g>
+
+  <g transform="translate(0,-28)" stroke="#2d5d57" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Toilet tank -->
+    <rect x="300" y="200" width="66" height="140" rx="14" fill="#ffffff"/>
+    <!-- Toilet bowl -->
+    <path d="M146 340 H372 Q372 402 306 420 L316 460 H206 L216 420 Q148 404 146 340 Z" fill="#ffffff"/>
+    <!-- Seat -->
+    <rect x="136" y="322" width="246" height="28" rx="14" fill="#ffffff"/>
+
+    <!-- Falling poop, with a happy face -->
+    <g fill="#8b5a2b" stroke="#4a2e14">
+      <ellipse cx="236" cy="262" rx="76" ry="30"/>
+      <ellipse cx="236" cy="224" rx="56" ry="25"/>
+      <ellipse cx="238" cy="190" rx="36" ry="20"/>
+      <path d="M232 172 Q244 146 266 140 Q256 160 262 176 Z"/>
+    </g>
+  </g>
+  <g transform="translate(0,-28)">
+    <circle cx="214" cy="224" r="11" fill="#ffffff"/>
+    <circle cx="258" cy="224" r="11" fill="#ffffff"/>
+    <circle cx="216" cy="226" r="5" fill="#1b1b1b"/>
+    <circle cx="260" cy="226" r="5" fill="#1b1b1b"/>
+    <path d="M208 256 Q236 278 264 256" fill="none" stroke="#1b1b1b" stroke-width="7" stroke-linecap="round"/>
+    <!-- Motion lines: it's falling! -->
+    <g stroke="#ffffff" stroke-width="9" stroke-linecap="round">
+      <path d="M150 150 V112"/>
+      <path d="M320 130 V96"/>
+      <path d="M182 120 V92"/>
+    </g>
+  </g>
+</svg>

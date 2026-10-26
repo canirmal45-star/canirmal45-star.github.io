@@ -1,0 +1,115 @@
+/* =====================================================================
+   style.css — how the PAGE looks (colours, sizes, fonts, spacing)
+
+   The colours INSIDE the game (sky, ground) are in config.js.
+   The colours AROUND the game (page background, button, text) are here.
+
+   License: MIT (see the LICENSE file)
+   ===================================================================== */
+
+
+/* ---------- Page colours ----------
+   These are "CSS variables". Change a colour once here and it changes
+   everywhere it's used. Colours are written as hex codes like #ff8a3d.
+   Tip: search "color picker" in Google to find the code for any colour. */
+:root {
+  --bg: #eef8f6;          /* page background */
+  --ink: #3b2a1e;         /* main text (a friendly brown, of course) */
+  --muted: #6b5a4c;       /* softer text (labels, help text) */
+  --panel: #ffffff;       /* panels / cards */
+  --accent: #8b5a2b;      /* button colour */
+  --accent-ink: #ffffff;  /* text on the button */
+  --border: #b9dcd6;      /* border around the game */
+  color-scheme: light;
+
+  /* Keeps the game clear of phone notches and rounded corners */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Dark-mode colours: used automatically when the device is set to dark mode */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14211f; --ink: #f3ece4; --muted: #b8aa9b;
+    --panel: #1d2e2b; --accent: #c98b4f; --accent-ink: #1a1206; --border: #2f4a45;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14211f; --ink: #f3ece4; --muted: #b8aa9b;
+  --panel: #1d2e2b; --accent: #c98b4f; --accent-ink: #1a1206; --border: #2f4a45;
+  color-scheme: dark;
+}
+
+
+/* ---------- Basic page setup ---------- */
+
+/* Makes widths include padding and borders (easier sizing) */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  /* Centre everything in a column */
+  display: flex; flex-direction: column; align-items: center;
+  padding: 16px;
+}
+
+/* The column that holds the title, score bar and game.
+   max-width stops it getting huge on big screens. */
+.wrap { width: 100%; max-width: 440px; }
+
+/* Game title */
+h1 { font-size: 2rem; font-weight: 700; margin: 4px 0 10px; letter-spacing: -0.5px; }
+
+
+/* ---------- Score bar (HUD) ---------- */
+.hud {
+  display: flex; justify-content: space-between; gap: 8px;
+  font-size: 1.05rem; margin-bottom: 10px; color: var(--muted);
+}
+.hud b { color: var(--ink); font-weight: 600; }  /* the numbers */
+
+
+/* ---------- Game area ---------- */
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;        /* always 3 wide by 4 tall */
+  border-radius: 22px;        /* rounded corners */
+  overflow: hidden;
+  border: 3px solid var(--border);
+  touch-action: none;         /* stops the page scrolling when you drag on phones */
+}
+canvas { display: block; width: 100%; height: 100%; }
+
+
+/* ---------- Start / Game over box ---------- */
+.overlay {
+  position: absolute; inset: 0;   /* cover the whole game area */
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 24px; gap: 12px;
+  background: rgba(20, 30, 60, 0.45);  /* see-through dark blue */
+  color: #fff;
+}
+.overlay[hidden] { display: none; }
+.overlay h2 { margin: 0; font-size: 2rem; }
+.overlay p { margin: 0; max-width: 28ch; line-height: 1.4; }
+
+
+/* ---------- Buttons ---------- */
+button {
+  font: inherit; font-weight: 600; font-size: 1.15rem;
+  background: var(--accent); color: var(--accent-ink);
+  border: none; border-radius: 999px;   /* pill shape */
+  padding: 12px 28px; cursor: pointer;
+}
+/* Outline shown when you select the button with the keyboard (Tab key) */
+button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+
+/* ---------- Help text under the game ---------- */
+.help { color: var(--muted); font-size: 0.95rem; margin-top: 10px; line-height: 1.4; }

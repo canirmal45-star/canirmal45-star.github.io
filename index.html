@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+  TOILET TROUBLE — a silly open-source catching game
+  Copyright (c) 2026 SALVO
+  License: MIT (see the LICENSE file). You can copy, change, share and sell it.
+
+  index.html = the PAGE LAYOUT ONLY.
+  It says WHAT is on the page (title, score bar, game area, buttons).
+    - How things LOOK  -> style.css
+    - Settings to tweak -> config.js
+    - How the game WORKS -> game.js
+
+  To play: double-click this file. It opens in your web browser.
+-->
+<html lang="en">
+<head>
+  <!-- Lets the page show emojis and special characters correctly -->
+  <meta charset="UTF-8">
+
+  <!-- Makes the page fit phone screens properly instead of looking tiny -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- Text shown in the browser tab (game.js replaces it with CONFIG.title) -->
+  <title>Toilet Trouble</title>
+
+  <!-- Loads the round, friendly "Fredoka" font from Google (needs internet;
+       without internet a normal font is used instead and the game still works) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Our own styling file -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- App stuff: lets phones install the game like an app (and the Play Store version use it) -->
+  <link rel="manifest" href="manifest.webmanifest">             <!-- app name, icon, colours -->
+  <link rel="icon" href="icons/icon-192.png">                   <!-- icon in the browser tab -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png">       <!-- icon on iPhone home screens -->
+  <meta name="theme-color" content="#a9e3dc">                   <!-- colour of the phone's top bar -->
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Game title (game.js fills in the text from CONFIG.title) -->
+    <h1 id="title">Toilet Trouble</h1>
+
+    <!-- HUD = "heads-up display": the score bar above the game -->
+    <div class="hud">
+      <span>Score <b id="score">0</b></span>
+      <span>Level <b id="level">1</b></span>
+      <span id="lives"></span>
+      <span>Best <b id="best">0</b></span>
+    </div>
+
+    <!-- The play area -->
+    <div class="stage" id="stage">
+      <!-- The canvas is a blank picture that game.js draws the game onto -->
+      <canvas id="game"></canvas>
+
+      <!-- The box that covers the game before you start and after game over -->
+      <div class="overlay" id="overlay">
+        <h2 id="overlayTitle"></h2>
+        <p id="overlayText"></p>
+        <button id="startBtn"></button>
+      </div>
+    </div>
+
+    <!-- Small help text under the game (filled in from CONFIG.helpText) -->
+    <p class="help" id="help"></p>
+  </div>
+
+  <!-- Load the JavaScript files. ORDER MATTERS:
+       config.js must come first, because game.js uses the settings in it. -->
+  <script src="config.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
