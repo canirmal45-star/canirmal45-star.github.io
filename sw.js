@@ -14,7 +14,7 @@
    License: MIT (see the LICENSE file)
    ===================================================================== */
 
-const CACHE_NAME = "toilet-trouble-v1";
+const CACHE_NAME = "toilet-trouble-v2";
 
 // The files saved for offline play
 const FILES = [
@@ -22,6 +22,7 @@ const FILES = [
   "index.html",
   "style.css",
   "config.js",
+  "sounds.js",
   "game.js",
   "manifest.webmanifest",
   "icons/icon-192.png",

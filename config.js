@@ -64,6 +64,21 @@ const CONFIG = {
   floorColor: "#9ab0c4",        // the floor strip at the bottom
   textColor: "#ffffff",         // the floating "+10" texts
 
+  // ---------- Sounds ----------
+  // Which sound plays when. Built-in sounds (made by code in sounds.js):
+  //   "plop", "sparkle", "glug", "fart", "flush", "sadTrombone", "beep"
+  // Or use your own sound file, e.g. "sounds/my-plop.mp3"
+  // Use "" (empty quotes) for no sound.
+  sounds: {
+    start: "flush",             // when you press the start button
+    catch: "plop",              // catching 💩
+    bonus: "sparkle",           // catching the golden 🧻
+    bad: "glug",                // clogging the toilet
+    levelUp: "fart",            // going up a level 💨
+    gameOver: "sadTrombone",    // game over
+  },
+  soundVolume: 0.6,             // 0 = silent, 1 = loudest
+
   // ---------- Lives display ----------
   lifeIcon: "🪠",               // one plunger is shown per life
   noLivesIcon: "🤢",            // shown when you have no lives left
@@ -79,5 +94,5 @@ const CONFIG = {
   levelUpText: "Level {level}! 💨",
   loseLifeText: "Clogged! -1 🪠",
   pausedText: "Occupied 🚪",
-  helpText: "Move with ← → or A / D, or drag across the game. Press P to pause.",
+  helpText: "Move with ← → or A / D, or drag across the game. Press P to pause, M for sound.",
 };

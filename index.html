@@ -8,6 +8,7 @@
   It says WHAT is on the page (title, score bar, game area, buttons).
     - How things LOOK  -> style.css
     - Settings to tweak -> config.js
+    - Sound effects -> sounds.js
     - How the game WORKS -> game.js
 
   To play: double-click this file. It opens in your web browser.
@@ -63,6 +64,9 @@
         <p id="overlayText"></p>
         <button id="startBtn"></button>
       </div>
+
+      <!-- Sound on/off button in the top-right corner of the game -->
+      <button class="sound-btn" id="soundBtn">🔊</button>
     </div>
 
     <!-- Small help text under the game (filled in from CONFIG.helpText) -->
@@ -70,8 +74,9 @@
   </div>
 
   <!-- Load the JavaScript files. ORDER MATTERS:
-       config.js must come first, because game.js uses the settings in it. -->
+       config.js must come first, because the others use the settings in it. -->
   <script src="config.js"></script>
+  <script src="sounds.js"></script>
   <script src="game.js"></script>
 </body>
 </html>

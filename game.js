@@ -104,6 +104,7 @@ function startGame() {
 
   $("overlay").hidden = true;     // hide the start box
   updateHud();
+  playSound(CONFIG.sounds.start);
   requestAnimationFrame(loop);    // start the game loop
 }
 
@@ -116,6 +117,7 @@ function endGame() {
     try { localStorage.setItem(BEST_SCORE_KEY, state.best); } catch (e) {}
   }
   updateHud();
+  playSound(CONFIG.sounds.gameOver);
 
   // Show the game over box
   $("overlayTitle").textContent = CONFIG.gameOverTitle;
@@ -212,14 +214,17 @@ function update(dt) {
 
     if (atPlayerHeight && closeEnough) {
       if (it.kind === "good") {
+        playSound(CONFIG.sounds.catch);
         addPoints(CONFIG.pointsPerCatch, it, pick(CONFIG.catchWords));
       } else if (it.kind === "bonus") {
+        playSound(CONFIG.sounds.bonus);
         addPoints(CONFIG.bonusPoints, it, CONFIG.bonusText);
       } else {
         // Bad item: the toilet is clogged, lose a life
         state.lives--;
         popup(CONFIG.loseLifeText, it.x, it.y);
-        if (state.lives <= 0) { updateHud(); endGame(); return; }
+        if (state.lives <= 0) { updateHud(); endGame(); return; }   // endGame plays its own sound
+        playSound(CONFIG.sounds.bad);
       }
       state.items.splice(i, 1);    // remove the caught item
       updateHud();
@@ -251,6 +256,7 @@ function addPoints(amount, it, word) {
   if (newLevel > state.level) {
     state.level = newLevel;
     popup(fillIn(CONFIG.levelUpText), W / 2, H / 2);
+    playSound(CONFIG.sounds.levelUp);
   }
 }
 
@@ -344,6 +350,7 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") { state.keys.left = true; e.preventDefault(); }
   if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") { state.keys.right = true; e.preventDefault(); }
   if ((e.key === "p" || e.key === "P") && state.running) state.paused = !state.paused;
+  if (e.key === "m" || e.key === "M") toggleSound();   // toggleSound is in sounds.js
 });
 window.addEventListener("keyup", (e) => {
   if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") state.keys.left = false;
