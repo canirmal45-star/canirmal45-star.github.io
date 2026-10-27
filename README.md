@@ -53,7 +53,8 @@ That's it. Nothing to install.
 | `sw.js` | The "service worker". Saves the game's files so it works offline once installed. Only runs on a website, not when you double-click. |
 | `icons/icon.svg` | The app icon drawing (a toilet with a happy 💩). Edit this to change the icon. |
 | `icons/icon-192.png`, `icons/icon-512.png` | The icon as pictures, in the two sizes phones and the Play Store need. |
-| `.nojekyll` | An empty file that tells GitHub Pages to serve every file as-is. Needed later for the Play Store link file in `.well-known/`. |
+| `.nojekyll` | An empty file that tells GitHub Pages to serve every file as-is. Without it, GitHub would hide the `.well-known` folder. |
+| `.well-known/assetlinks.json` | Proves the Play Store app and this website belong together, so the app opens full-screen with no browser address bar. Contains the app's package ID (`com.salvo.toilettrouble`) and signing-key fingerprints. |
 | `README.md` | This guide. |
 | `LICENSE` | The MIT license. It says anyone may use, change and share this game as long as they keep the notice. |
 | `fruit-fall.html` | The original one-file version of the game, kept as a backup. Safe to delete. |
