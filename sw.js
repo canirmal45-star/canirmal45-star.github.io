@@ -14,7 +14,7 @@
    License: MIT (see the LICENSE file)
    ===================================================================== */
 
-const CACHE_NAME = "toilet-trouble-v2";
+const CACHE_NAME = "toilet-trouble-v3";
 
 // The files saved for offline play
 const FILES = [
@@ -25,6 +25,7 @@ const FILES = [
   "sounds.js",
   "game.js",
   "manifest.webmanifest",
+  "fonts/fredoka.woff2",
   "icons/icon-192.png",
   "icons/icon-512.png",
 ];
@@ -51,8 +52,8 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        // Keep a copy for next time we're offline (this also saves the font)
-        if (response.ok || response.type === "opaque") {
+        // Keep a copy for next time we're offline
+        if (response.ok) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
         }

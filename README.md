@@ -60,6 +60,8 @@ That's it. Nothing to install.
 | `icons/icon-192.png`, `icons/icon-512.png` | The icon as pictures, in the two sizes phones and the Play Store need. |
 | `.nojekyll` | An empty file that tells GitHub Pages to serve every file as-is. Without it, GitHub would hide the `.well-known` folder. |
 | `.well-known/assetlinks.json` | Proves the Play Store app and this website belong together, so the app opens full-screen with no browser address bar. Contains the app's package ID (`com.salvo.toilettrouble`) and signing-key fingerprints. |
+| `privacy.html` | The privacy policy page (the game collects nothing). Google Play needs its link: `https://canirmal45-star.github.io/privacy.html`. Update it if the game ever adds ads, accounts or tracking. |
+| `fonts/fredoka.woff2` | The round "Fredoka" font, stored with the game so it works offline. `fonts/OFL.txt` is its free license. |
 | `README.md` | This guide. |
 | `LICENSE` | The MIT license. It says anyone may use, change and share this game as long as they keep the notice. |
 | `fruit-fall.html` | The original one-file version of the game, kept as a backup. Safe to delete. |
@@ -216,6 +218,16 @@ The Play Store app is a thin wrapper made with **PWABuilder** (pwabuilder.com).
 It opens that website full-screen, so **uploading new files to GitHub also updates the app**.
 You only need to upload a new Play Store build if you change the app's name, icon or package settings.
 
+### Play Store details
+- Package ID: `com.salvo.toilettrouble` (can never change)
+- The Play Store files (`.aab`, signing key, store pictures and text) are kept **outside** this folder in
+  `E:\Toilet Trouble - Google Play package`, because this folder is public on GitHub. Never put the signing key here.
+- `store/store-listing.md` in that folder has all the store text and form answers, ready to copy and paste.
+- After the first upload to the Play Console, Google's own "app signing key" fingerprint must be added to
+  `.well-known/assetlinks.json` (next to the one already there). Otherwise the Play Store version shows an address bar.
+- A new **version** of the Android app (new `.aab`) is only needed when the name, icon or package settings change.
+  Make it in PWABuilder with the **same** signing key ("Use mine") and a higher version code.
+
 ### Updating the live game
 1. Go to your repository `canirmal45-star.github.io` on github.com.
 2. Click **Add file → Upload files**.
@@ -254,7 +266,7 @@ You only need to upload a new Play Store build if you change the app's name, ico
 | **Changes not appearing** | Make sure you **saved** the file, then hard-refresh with **Ctrl + F5**. |
 | **An emoji shows as a box ▯** | That device's emoji set is too old for that emoji. Pick a more common one. |
 | **Emojis look different on my phone** | Normal. Each company (Apple, Google, Samsung, Microsoft) draws emojis their own way. |
-| **Font looks plain** | The "Fredoka" font loads from the internet. Offline, a normal font is used instead. The game still works. |
+| **Font looks plain** | Check that the `fonts` folder (with `fredoka.woff2` inside) is next to `index.html` and was uploaded to GitHub. |
 | **No sound** | Check the 🔊 button isn't showing 🔇. Turn up the device volume. On iPhone, flip the silent switch off. Sounds only start after you press the start button. |
 | **Page scrolls on my phone while playing** | Drag *inside* the game area. |
 | **Website still shows the old version after uploading** | GitHub Pages takes 1–2 minutes to update. Then refresh twice. The first refresh downloads the new version and the second shows it. |
@@ -265,3 +277,5 @@ You only need to upload a new Play Store build if you change the app's name, ico
 ## License
 
 MIT License. Copyright (c) 2026 SALVO. See the `LICENSE` file.
+
+The Fredoka font is by The Fredoka Project Authors, under the SIL Open Font License (`fonts/OFL.txt`).

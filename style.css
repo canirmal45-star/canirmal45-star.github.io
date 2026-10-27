@@ -8,6 +8,18 @@
    ===================================================================== */
 
 
+/* ---------- Font ----------
+   The round, friendly "Fredoka" font lives in the fonts folder, so it works
+   offline and nothing is downloaded from other websites.
+   (Free font, SIL Open Font License: see fonts/OFL.txt) */
+@font-face {
+  font-family: "Fredoka";
+  src: url("fonts/fredoka.woff2") format("woff2");
+  font-weight: 300 700;     /* this one file covers normal, semi-bold and bold */
+  font-display: swap;
+}
+
+
 /* ---------- Page colours ----------
    These are "CSS variables". Change a colour once here and it changes
    everywhere it's used. Colours are written as hex codes like #ff8a3d.
