@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.salvo.toilettrouble",
+        "sha256_cert_fingerprints": ["B6:9C:30:18:68:E6:3F:2D:FF:0F:C4:ED:BD:E4:5F:6A:41:81:C4:BD:20:EA:CB:18:2C:C3:F9:3D:17:83:44:84"]
+      }
+    }]
