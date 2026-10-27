@@ -29,6 +29,10 @@ no build step.
 | Mouse | Move the mouse over the game |
 | Phone / tablet | Drag your finger across the game |
 | Pause | Press **P** |
+| Sound on / off | Tap the **🔊** button in the corner, or press **M** |
+
+**Sounds:** *flush* when you start, *plop* for each 💩, a *sparkle* for the golden 🧻,
+a *glug* when you get clogged, a *fart* 💨 when you level up, and a sad trombone at game over.
 
 ---
 
@@ -48,6 +52,7 @@ That's it. Nothing to install.
 | `index.html` | The page layout: title, score bar, game area and Start button. Double-click this to play. |
 | `style.css` | How the page around the game looks: page colours, fonts, the button shape. |
 | `config.js` | **All the settings you'll want to change**: emojis, points, speeds, lives, colours and every message. Start here. |
+| `sounds.js` | All the sound effects (plop, fart, flush…), made by code, so no sound files are needed. Also the 🔊 mute button. |
 | `game.js` | The game logic: the game loop, spawning items, catching, scoring and controls. You rarely need to edit it. |
 | `manifest.webmanifest` | The app's "ID card": name, icon and colours. Lets phones install the game, and is what PWABuilder uses to build the Play Store app. |
 | `sw.js` | The "service worker". Saves the game's files so it works offline once installed. Only runs on a website, not when you double-click. |
@@ -119,9 +124,43 @@ The bathroom wall is drawn in `game.js` in the **7. Drawing** section, using the
 
 For example, a pink bathroom: `wallTop: "#f7b6d2"`, `wallBottom: "#fde7f1"`.
 
-### Add a sound
-Sound effects are coming in the next update (they'll be made by code, so no sound files are needed).
-This section will explain how to change them.
+### Change which sound plays when
+1. Open `config.js` and find the **Sounds** part:
+   ```js
+   sounds: {
+     start: "flush",
+     catch: "plop",
+     bonus: "sparkle",
+     bad: "glug",
+     levelUp: "fart",
+     gameOver: "sadTrombone",
+   },
+   ```
+2. Swap any sound for another built-in one: `"plop"`, `"sparkle"`, `"glug"`, `"fart"`, `"flush"`, `"sadTrombone"` or `"beep"`.
+   For example, `catch: "fart",` makes every catch a fart. 💨
+3. Use `""` (empty quotes) for no sound, e.g. `start: "",`
+4. Change `soundVolume` to make everything louder (up to `1`) or quieter (down to `0`).
+
+### Add your own sound file
+1. Make a folder called `sounds` next to `index.html`.
+2. Put your sound file in it, for example `sounds/my-plop.mp3` (`.mp3` and `.wav` work everywhere).
+3. In `config.js`, use the file's path instead of a sound name:
+   `catch: "sounds/my-plop.mp3",`
+4. So it also works offline in the app, open `sw.js`, add `"sounds/my-plop.mp3",` to the `FILES` list,
+   and change `toilet-trouble-v2` to `toilet-trouble-v3` (a new number each time you change the list).
+5. Upload the `sounds` folder and the changed files to GitHub.
+
+> Only use sounds you made yourself or that are free to use (for example from freesound.org with a "CC0" license).
+> Sounds from games, films or TV shows can get the app removed from the Play Store.
+
+### Make a new built-in sound
+The sounds are "recipes" in `sounds.js`, inside `SOUND_RECIPES`. The easiest way to start is to copy
+`plop`, rename it (e.g. `boing`), and play with the numbers:
+- `from` / `to`: the starting and ending pitch (low numbers = deep, high numbers = squeaky)
+- `duration`: how long it lasts, in seconds
+- `type`: `"sine"` (smooth), `"triangle"` (soft), `"square"` (buzzy, retro), `"sawtooth"` (very buzzy)
+
+Then use your new name in `config.js`, e.g. `bonus: "boing",`
 
 ---
 
@@ -157,6 +196,12 @@ fall faster (`speedPerLevel`) and appear more often (`spawnFasterPerLevel`).
 **Drawing (section 7)**
 Painted back to front, like layers: wall → tiles → floor → falling items → toilet → floating texts.
 
+**Sounds (`sounds.js`)**
+`game.js` calls `playSound(...)` at the important moments (catch, clog, level up, game over).
+`playSound` looks up the recipe in `sounds.js` and builds the sound from tones and noise using the
+browser's Web Audio system. Browsers only allow sound after the player taps something,
+so the sound system switches on when you press the start button.
+
 **App support (section 9)**
 When the game is on a website, this switches on `sw.js` so the game works offline.
 
@@ -183,11 +228,11 @@ You only need to upload a new Play Store build if you change the app's name, ico
 
 **Easy**
 - More bad items (🎮 🪥 💍 🐸)
+- Swap the sounds around in `config.js` (fart on every catch?)
 - Different funny words and messages
 - A different colour bathroom
 
 **Medium**
-- Sound effects (plop, glug, flush) *(planned next)*
 - A 60-second "speed run" mode
 - A tappable pause button for phones
 - A shake effect when the toilet gets clogged
@@ -210,6 +255,7 @@ You only need to upload a new Play Store build if you change the app's name, ico
 | **An emoji shows as a box ▯** | That device's emoji set is too old for that emoji. Pick a more common one. |
 | **Emojis look different on my phone** | Normal. Each company (Apple, Google, Samsung, Microsoft) draws emojis their own way. |
 | **Font looks plain** | The "Fredoka" font loads from the internet. Offline, a normal font is used instead. The game still works. |
+| **No sound** | Check the 🔊 button isn't showing 🔇. Turn up the device volume. On iPhone, flip the silent switch off. Sounds only start after you press the start button. |
 | **Page scrolls on my phone while playing** | Drag *inside* the game area. |
 | **Website still shows the old version after uploading** | GitHub Pages takes 1–2 minutes to update. Then refresh twice. The first refresh downloads the new version and the second shows it. |
 | **404 page on the website** | The repository must be named exactly `canirmal45-star.github.io`, and `index.html` must be at the top level, not inside a folder. |
